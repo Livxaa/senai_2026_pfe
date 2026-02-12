@@ -1,0 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.destaque {
+    color: white;
+    background-color: #28a745;
+    padding: 10px;
+    border-radius: 8px;
+}
