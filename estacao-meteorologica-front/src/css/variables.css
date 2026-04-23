@@ -1,0 +1,23 @@
+:root {
+  --primary-dark: #0d3b66;
+  --bg-light: #faf0ca;
+  --accent-yellow: #f4d35e;
+  --accent-orange: #ee964b;
+  --danger-red: #f95738;
+  --white: #ffffff;
+  /* Gradiente suave que mistura o creme com um toque do azul no fundo */
+  --bg-gradient: linear-gradient(135deg, #faf0ca 0%, #f4d35e 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  color: var(--primary-dark);
+}

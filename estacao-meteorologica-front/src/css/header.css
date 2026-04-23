@@ -1,0 +1,44 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1e272e;
+    padding: 0 5%; /* Padding lateral em porcentagem ajuda na responsividade */
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    
+    /* CORREÇÃO AQUI */
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%; /* Faz ocupar a tela toda */
+    height: 70px; /* Altura fixa para sabermos quanto de margem dar no resto */
+    z-index: 1000;
+}
+
+header h2 {
+    color: aliceblue;
+    font-size: 1.2rem;
+    white-space: nowrap; /* Impede o título de quebrar linha */
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+}
+
+/* Deixar os links com cara de botão moderno */
+header nav ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    background-color: rgba(255,255,255,0.1);
+    transition: 0.3s;
+}
+
+header nav ul li a:hover {
+    background-color: #3498db;
+}
