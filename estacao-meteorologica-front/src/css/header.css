@@ -1,44 +1,101 @@
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #1e272e;
-    padding: 0 5%; /* Padding lateral em porcentagem ajuda na responsividade */
-    color: white;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    
-    /* CORREÇÃO AQUI */
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100%; /* Faz ocupar a tela toda */
-    height: 70px; /* Altura fixa para sabermos quanto de margem dar no resto */
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 5%;
+  color: #f8fafc;
+  background: rgba(15, 23, 42, 0.88);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+  box-shadow: 0 16px 36px rgba(2, 6, 23, 0.35);
+  backdrop-filter: blur(16px);
 }
 
 header h2 {
-    color: aliceblue;
-    font-size: 1.2rem;
-    white-space: nowrap; /* Impede o título de quebrar linha */
+  margin: 0;
+  color: #f8fafc;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
 }
 
 header nav ul {
-    display: flex;
-    list-style: none;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-/* Deixar os links com cara de botão moderno */
+header nav ul li {
+  margin: 0;
+}
+
 header nav ul li a {
-    text-decoration: none;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    background-color: rgba(255,255,255,0.1);
-    transition: 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #e2e8f0;
+  padding: 10px 16px;
+  min-height: 40px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
 header nav ul li a:hover {
-    background-color: #3498db;
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(96, 165, 250, 0.38);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.18);
+}
+
+header nav ul li a:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 720px) {
+  header {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  header h2 {
+    width: 100%;
+    text-align: center;
+  }
+
+  header nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  header nav ul li a {
+    padding: 9px 14px;
+    font-size: 0.85rem;
+  }
 }

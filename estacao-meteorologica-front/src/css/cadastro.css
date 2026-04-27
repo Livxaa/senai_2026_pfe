@@ -1,97 +1,94 @@
-/* Container principal para centralizar tudo */
+/* Container principal - Ajustado para melhor contraste */
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    padding-top: 80px; /* Espaço para o Header fixo não cobrir o título */
-    background-color: #f4f7f6;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-h2 {
-    color: #2c3e50;
-    margin-bottom: 20px;
-    font-size: 1.8rem;
-}
-
-/* Estilo do formulário */
-.cadastro-form {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 450px; /* Largura máxima do formulário */
-}
-
-/* Espaçamento entre os campos */
-.form-group {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #34495e;}
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     min-height: 100vh;
-    background-color: #f0f2f5; /* Um cinza mais suave */
-    
-    /* ESPAÇO PARA O HEADER NÃO ATROPELAR */
-    padding-top: 100px; 
-    padding-bottom: 50px;
+    box-sizing: border-box;
+    /* Um degradê suave no fundo dá mais profundidade que uma cor sólida */
+    background: linear-gradient(135deg, #6187c1 0%, #4a6fa5 100%);
+    padding: 100px 20px 50px 20px;
+    font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 h2 {
     margin-bottom: 30px;
-    color: #2c3e50;
-    font-weight: 300; /* Letra mais fina fica mais elegante */
+    color: #ffffff; /* Branco para contrastar com o fundo azul */
+    font-weight: 300;
+    font-size: 2rem;
+    letter-spacing: -0.5px;
 }
 
+/* Estilo do formulário - White Modern Card */
 .cadastro-form {
-    background: white;
+    background: #ffffff;
     padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    border-radius: 16px; /* Bordas mais arredondadas são tendência */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 500px; /* Limita a largura para não ficar gigante */
+    max-width: 480px;
+    transition: transform 0.3s ease;
 }
 
+/* Efeito de foco nos campos */
 .form-group {
     margin-bottom: 20px;
+    position: relative;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    font-size: 0.9rem;
-    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4a5568;
+    text-transform: uppercase; /* Dá um ar de organização técnica */
+    letter-spacing: 0.5px;
 }
 
 .form-group input {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    padding: 14px;
+    border: 2px solid #edf2f7; /* Borda mais clara */
+    border-radius: 8px;
+    background-color: #f8fafc;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
-/* Botão de Salvar */
+/* Feedback visual quando o usuário clica no campo */
+.form-group input:focus {
+    outline: none;
+    border-color: #6187c1;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(97, 135, 193, 0.1);
+}
+
+/* Botão com efeito de profundidade e hover */
 .cadastro-form button {
     width: 100%;
-    padding: 15px;
+    padding: 16px;
     background-color: #27ae60;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 1rem;
     margin-top: 10px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(39, 174, 96, 0.2);
+}
+
+.cadastro-form button:hover {
+    background-color: #2ecc71;
+    transform: translateY(-2px); /* Pequeno pulo ao passar o mouse */
+    box-shadow: 0 7px 14px rgba(39, 174, 96, 0.3);
+}
+
+.cadastro-form button:active {
+    transform: translateY(0);
 }
