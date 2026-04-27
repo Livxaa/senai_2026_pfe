@@ -1,0 +1,350 @@
+.relatorio-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, rgba(96, 165, 250, 0.18), transparent 34%),
+    linear-gradient(180deg, #0f172a 0%, #111827 100%);
+  color: #e2e8f0;
+}
+
+.relatorio-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-align: left;
+}
+
+.relatorio-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: stretch;
+  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 20px 45px rgba(2, 6, 23, 0.35);
+}
+
+.relatorio-copy {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+.relatorio-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.16);
+  color: #bfdbfe;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.relatorio-copy h3 {
+  margin: 0;
+  font-size: 1.9rem;
+  line-height: 1.15;
+  color: #f8fafc;
+}
+
+.relatorio-copy p {
+  margin-top: 10px;
+  color: #cbd5e1;
+  max-width: 62ch;
+}
+
+.relatorio-summary {
+  flex: 0 1 380px;
+  min-width: 280px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.summary-card {
+  padding: 16px 14px;
+  border-radius: 18px;
+  background: rgba(30, 41, 59, 0.82);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.summary-card span {
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+.summary-card strong {
+  display: block;
+  font-size: 1.25rem;
+  color: #f8fafc;
+  line-height: 1.1;
+}
+
+.relatorio-card {
+  background: rgba(15, 23, 42, 0.84);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.3);
+}
+
+.relatorio-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.relatorio-card-header h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #f8fafc;
+}
+
+.relatorio-card-header p {
+  margin-top: 6px;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.relatorio-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.14);
+  color: #86efac;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.chart-card {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(2, 6, 23, 0.26);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.legend-item::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.legend-temperature::before {
+  background: linear-gradient(90deg, #f59e0b, #fb7185);
+}
+
+.legend-humidity::before {
+  background: linear-gradient(90deg, #38bdf8, #22c55e);
+}
+
+.weather-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.chart-grid {
+  stroke: rgba(148, 163, 184, 0.16);
+  stroke-width: 1;
+  stroke-dasharray: 4 6;
+}
+
+.chart-line {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chart-temperature {
+  stroke: url(#tempGradient);
+}
+
+.chart-humidity {
+  stroke: url(#humidityGradient);
+}
+
+.chart-dot {
+  stroke: #0f172a;
+  stroke-width: 2;
+}
+
+.chart-dot-temperature {
+  fill: #fb7185;
+}
+
+.chart-dot-humidity {
+  fill: #38bdf8;
+}
+
+.chart-label {
+  fill: #94a3b8;
+  font-size: 0.72rem;
+  text-anchor: middle;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  background: rgba(2, 6, 23, 0.18);
+}
+
+.relatorio-table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.relatorio-table thead th {
+  text-align: left;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.relatorio-table tbody tr {
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.relatorio-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.relatorio-table tbody tr:hover {
+  background: rgba(96, 165, 250, 0.08);
+  transform: translateY(-1px);
+}
+
+.relatorio-table td {
+  padding: 16px 18px;
+  color: #e2e8f0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+}
+
+.relatorio-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-time {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 84px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.16);
+  color: #bfdbfe;
+  font-weight: 700;
+}
+
+.metric-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 82px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.84rem;
+}
+
+.metric-good {
+  background: rgba(16, 185, 129, 0.16);
+  color: #86efac;
+}
+
+.metric-warning {
+  background: rgba(245, 158, 11, 0.16);
+  color: #fcd34d;
+}
+
+.metric-bad {
+  background: rgba(239, 68, 68, 0.16);
+  color: #fca5a5;
+}
+
+@media (max-width: 900px) {
+  .relatorio-container {
+    padding: 24px 16px 36px;
+  }
+
+  .relatorio-hero {
+    padding: 22px;
+  }
+
+  .relatorio-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .relatorio-card {
+    padding: 20px;
+  }
+
+  .relatorio-card-header {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .relatorio-copy h3 {
+    font-size: 1.5rem;
+  }
+
+  .relatorio-table {
+    min-width: 560px;
+  }
+}
