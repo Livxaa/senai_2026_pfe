@@ -1,0 +1,15 @@
+:root {
+  --primary-dark: #0d3b66;
+  --bg-light: #84f1e9;
+  --accent-blue: #5ea1f4;
+  --cream: #ece2d9;
+  --danger-red: #f95738;
+  --white: #ffffff;
+  --bg-gradient: linear-gradient(135deg, #9defe9 0%, #208991 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
