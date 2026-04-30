@@ -47,6 +47,8 @@ function GraficoLinhaTemperatura({ dados, titulo }) {
     "Z"
   ].join(" ");
 
+  const gridLines = [0, 1, 2, 3].map((step) => padding + (graphHeight / 3) * step);
+
   const mediaTemperatura = (dados.reduce((sum, d) => sum + d.temperatura, 0) / dados.length).toFixed(1);
 
   return (
@@ -64,7 +66,7 @@ function GraficoLinhaTemperatura({ dados, titulo }) {
       </div>
 
       <div className="chart-container">
-        <svg viewBox={`0 0 ${width} ${height}`} className="chart-svg">
+        <svg viewBox={`0 0 ${width} ${height}`} className="chart-svg" preserveAspectRatio="xMinYMin meet">
           {/* Grade de fundo */}
           <defs>
             <linearGradient id="areaGradientRelatorio" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -77,6 +79,20 @@ function GraficoLinhaTemperatura({ dados, titulo }) {
               <stop offset="100%" stopColor="#1e3a8a" />
             </linearGradient>
           </defs>
+
+          <g className="chart-grid">
+            {gridLines.map((y) => (
+              <line
+                key={y}
+                x1={padding}
+                y1={y}
+                x2={width - padding}
+                y2={y}
+                stroke="rgba(148, 163, 184, 0.15)"
+                strokeWidth="1"
+              />
+            ))}
+          </g>
 
           {/* Área sob a curva */}
           <path d={areaData} fill="url(#areaGradientRelatorio)" />
@@ -94,14 +110,17 @@ function GraficoLinhaTemperatura({ dados, titulo }) {
 
           {/* Pontos interativos */}
           {points.map((point) => (
-            <g key={point.index} className="chart-point-group">
+            <g
+              key={point.index}
+              className="chart-point-group"
+              onMouseEnter={() => setHoveredIndex(point.index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
               <circle
                 cx={point.x}
                 cy={point.y}
-                r="5"
+                r="6"
                 className={`chart-point ${hoveredIndex === point.index ? "chart-point--active" : ""}`}
-                onMouseEnter={() => setHoveredIndex(point.index)}
-                onMouseLeave={() => setHoveredIndex(null)}
               />
               
               {hoveredIndex === point.index && (
@@ -161,6 +180,17 @@ function GraficoLinhaTemperatura({ dados, titulo }) {
             stroke="rgba(148, 163, 184, 0.2)"
             strokeWidth="1"
           />
+          {points.map((point) => (
+            <text
+              key={`label-${point.index}`}
+              x={point.x}
+              y={padding + graphHeight + 22}
+              textAnchor="middle"
+              className="chart-label"
+            >
+              {point.horario}
+            </text>
+          ))}
         </svg>
       </div>
 

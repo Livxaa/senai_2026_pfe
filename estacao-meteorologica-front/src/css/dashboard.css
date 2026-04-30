@@ -194,6 +194,16 @@
   animation: lineAnimation 0.8s ease-in-out forwards;
 }
 
+.chart-grid line {
+  opacity: 0.9;
+}
+
+.chart-label {
+  fill: #94a3b8;
+  font-size: 0.78rem;
+  font-family: "Inter", sans-serif;
+}
+
 @keyframes lineAnimation {
   from {
     stroke-dasharray: 1000;

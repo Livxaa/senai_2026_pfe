@@ -112,9 +112,19 @@
   display: block;
 }
 
-.chart-line {
+..chart-line {
   filter: drop-shadow(0 4px 8px rgba(96, 165, 250, 0.2));
   animation: lineAnimation 0.8s ease-in-out forwards;
+}
+
+.chart-grid line {
+  opacity: 0.75;
+}
+
+.chart-label {
+  fill: #94a3b8;
+  font-size: 0.78rem;
+  font-family: "Inter", sans-serif;
 }
 
 @keyframes lineAnimation {
