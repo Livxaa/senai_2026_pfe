@@ -1,5 +1,6 @@
 import Header from "../../componentes/header";
 import "../../css/dashboard.css";
+import { useState } from "react";
 
 const variacaoTemperatura = [
   { horario: "08h", temperatura: 18 },
@@ -9,6 +10,170 @@ const variacaoTemperatura = [
   { horario: "16h", temperatura: 24 },
   { horario: "18h", temperatura: 20 },
 ];
+
+function GraficoLinhaTemperatura({ dados }) {
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  
+  const minTemp = Math.min(...dados.map(d => d.temperatura));
+  const maxTemp = Math.max(...dados.map(d => d.temperatura));
+  const range = Math.max(1, maxTemp - minTemp);
+  
+  const width = 600;
+  const height = 240;
+  const padding = 40;
+  const graphWidth = width - padding * 2;
+  const graphHeight = height - padding * 2;
+  
+  // Calcula pontos da linha
+  const points = dados.map((d, i) => {
+    const x = padding + (i / (dados.length - 1)) * graphWidth;
+    const y = padding + graphHeight - ((d.temperatura - minTemp) / range) * graphHeight;
+    return { x, y, ...d, index: i };
+  });
+  
+  // Gera caminho SVG para a linha
+  const pathData = points
+    .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`)
+    .join(" ");
+  
+  // Gera area sob a curva
+  const areaData = [
+    `M ${points[0].x} ${points[0].y}`,
+    ...points.map((p, i) => `L ${p.x} ${p.y}`),
+    `L ${points[points.length - 1].x} ${padding + graphHeight}`,
+    `L ${points[0].x} ${padding + graphHeight}`,
+    "Z"
+  ].join(" ");
+
+  return (
+    <div className="grafico">
+      <div className="section-head">
+        <div>
+          <h3>Variação de Temperatura</h3>
+          <p>Oscilação das últimas horas com visualização dinâmica.</p>
+        </div>
+        <span className="chart-badge">Amplitude de {(maxTemp - minTemp).toFixed(1)}°C</span>
+      </div>
+
+      <div className="chart-note">
+        Pico de {maxTemp}°C · Mínima de {minTemp}°C
+      </div>
+
+      <div className="chart-container">
+        <svg viewBox={`0 0 ${width} ${height}`} className="chart-svg">
+          {/* Grade de fundo */}
+          <defs>
+            <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="rgba(96, 165, 250, 0.3)" />
+              <stop offset="100%" stopColor="rgba(96, 165, 250, 0.05)" />
+            </linearGradient>
+            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#60a5fa" />
+              <stop offset="50%" stopColor="#3b82f6" />
+              <stop offset="100%" stopColor="#1e40af" />
+            </linearGradient>
+          </defs>
+
+          {/* Área sob a curva */}
+          <path d={areaData} fill="url(#areaGradient)" />
+
+          {/* Linha principal */}
+          <polyline
+            points={points.map(p => `${p.x},${p.y}`).join(" ")}
+            fill="none"
+            stroke="url(#lineGradient)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="chart-line"
+          />
+
+          {/* Pontos interativos */}
+          {points.map((point) => (
+            <g key={point.index} className="chart-point-group">
+              <circle
+                cx={point.x}
+                cy={point.y}
+                r="5"
+                className={`chart-point ${hoveredIndex === point.index ? "chart-point--active" : ""}`}
+                onMouseEnter={() => setHoveredIndex(point.index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              />
+              
+              {hoveredIndex === point.index && (
+                <g>
+                  {/* Linha vertical de referência */}
+                  <line
+                    x1={point.x}
+                    y1={padding}
+                    x2={point.x}
+                    y2={padding + graphHeight}
+                    stroke="rgba(96, 165, 250, 0.3)"
+                    strokeWidth="1"
+                    strokeDasharray="4"
+                    className="chart-guide-line"
+                  />
+                  
+                  {/* Tooltip */}
+                  <g className="chart-tooltip">
+                    <rect
+                      x={point.x - 35}
+                      y={point.y - 50}
+                      width="70"
+                      height="40"
+                      rx="8"
+                      fill="rgba(15, 23, 42, 0.95)"
+                      stroke="rgba(96, 165, 250, 0.5)"
+                      strokeWidth="1"
+                    />
+                    <text
+                      x={point.x}
+                      y={point.y - 28}
+                      textAnchor="middle"
+                      className="tooltip-temp"
+                    >
+                      {point.temperatura}°C
+                    </text>
+                    <text
+                      x={point.x}
+                      y={point.y - 10}
+                      textAnchor="middle"
+                      className="tooltip-time"
+                    >
+                      {point.horario}
+                    </text>
+                  </g>
+                </g>
+              )}
+            </g>
+          ))}
+
+          {/* Eixo X */}
+          <line
+            x1={padding}
+            y1={padding + graphHeight}
+            x2={width - padding}
+            y2={padding + graphHeight}
+            stroke="rgba(148, 163, 184, 0.2)"
+            strokeWidth="1"
+          />
+        </svg>
+      </div>
+
+      {/* Legenda */}
+      <div className="chart-legend">
+        <div className="legend-item">
+          <div className="legend-color legend-color--warm"></div>
+          <span>Temperaturas altas</span>
+        </div>
+        <div className="legend-item">
+          <div className="legend-color legend-color--cool"></div>
+          <span>Temperaturas baixas</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Dashboard() {
   const maxTemperatura = Math.max(...variacaoTemperatura.map((item) => item.temperatura));
@@ -72,49 +237,7 @@ export default function Dashboard() {
         </section>
 
         <section className="main-content">
-          <div className="grafico">
-            <div className="section-head">
-              <div>
-                <h3>Variação de Temperatura</h3>
-                <p>Oscilação das últimas horas com leitura mínima, máxima e média.</p>
-              </div>
-              <span className="chart-badge">Amplitude de {amplitude}°C</span>
-            </div>
-
-            <div className="chart-note">
-              Pico de {maxTemperatura}°C às 14h · Média de {mediaTemperatura}°C ao longo do dia
-            </div>
-
-            <div className="bar-mockup">
-              <div className="chart-scale">
-                <span>{maxTemperatura}°C</span>
-                <span>{mediaTemperatura}°C</span>
-                <span>{minTemperatura}°C</span>
-              </div>
-
-              <div className="bar-chart" aria-label="Gráfico de variação de temperatura">
-                {variacaoTemperatura.map((item) => {
-                  const normalized = (item.temperatura - minTemperatura) / amplitude;
-                  const barHeight = 18 + normalized * 82;
-
-                  return (
-                    <div className="bar-column" key={item.horario}>
-                      <span className="bar-value">{item.temperatura}°</span>
-                      <div className="bar-track">
-                        <div
-                          className={`bar-fill ${
-                            item.temperatura >= 25 ? "bar-fill--warm" : "bar-fill--cool"
-                          }`}
-                          style={{ height: `${barHeight}%` }}
-                        />
-                      </div>
-                      <span className="bar-label">{item.horario}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+          <GraficoLinhaTemperatura dados={variacaoTemperatura} />
 
           <section className="tabela-section">
             <div className="section-head section-head--table">
